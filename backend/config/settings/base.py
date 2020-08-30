@@ -55,10 +55,6 @@ MIDDLEWARE = [
 ]
 
 
-# MIGRATIONS
-MIGRATION_MODULES = {'sites': 'apps.contrib.sites.migrations'}
-
-
 # DATABASES
 DB_USER = env('POSTGRES_USER', default='')
 DB_PASSWORD = env('POSTGRES_PASSWORD', default='')
