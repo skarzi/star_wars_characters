@@ -1,0 +1,7 @@
+---
+version: '3.8'
+services:
+  swapi:
+    ports:
+      - "8001:8000"
+    command: python manage.py runserver 0.0.0.0:8000

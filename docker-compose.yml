@@ -1,0 +1,12 @@
+---
+version: '3.8'
+services:
+  swapi:
+    init: true
+    build:
+      context: .
+      dockerfile: .devops/docker/swapi/Dockerfile
+    expose:
+      - 8000
+    volumes:
+      - "./swapi:/app"
