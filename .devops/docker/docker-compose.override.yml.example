@@ -26,3 +26,17 @@ services:
     volumes:
       - ./shared/media:/app/media:cached
       - ./shared/static_files:/app/static_files:cached
+
+  web:
+    tty: true
+    user: "!!UID!!"
+    build:
+      args:
+        USER_ID: "!!UID!!"
+    ports:
+      - "8080:8080"
+    command: quasar dev
+    env_file:
+      - .envs/.frontend
+    volumes:
+      - ./frontend/node_modules:/app/node_modules

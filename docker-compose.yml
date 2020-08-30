@@ -21,6 +21,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
 
   app:
+    init: true
     build:
       context: .
       dockerfile: ./.devops/docker/backend/Dockerfile
@@ -30,3 +31,11 @@ services:
       - ./shared/templates:/app/templates:cached
     depends_on:
       - db
+
+  web:
+    init: true
+    build:
+      context: .
+      dockerfile: ./.devops/docker/frontend/Dockerfile
+    volumes:
+      - ./frontend:/app
