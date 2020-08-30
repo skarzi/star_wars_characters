@@ -25,4 +25,7 @@ DJANGO_ALLOWED_HOSTS=.wisely.dev.tylko.com
 
 
 # STAR WARS API
-STAR_WARS_API_URL=http://swapi/api
+STAR_WARS_API_URL=http://swapi:8000/api
+
+# DJANGO EXTENSIONS
+IPYTHON_ARGUMENTS=--TerminalInteractiveShell.editing_mode=vi,--TerminalInteractiveShell.editor=vim

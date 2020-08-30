@@ -37,6 +37,7 @@ STATIC_ROOT = str(APPS_DIR.path('shared/static_files'))
 
 # DJANGO EXTENSIONS
 INSTALLED_APPS.append('django_extensions')
+IPYTHON_ARGUMENTS = env.list('IPYTHON_ARGUMENTS', default=[])
 
 
 # DJANGO CORS HEADERS
