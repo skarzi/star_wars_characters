@@ -22,6 +22,7 @@ shared/postgresql
 shared/static
 shared/static_files
 shared/templates
+.tests_reports/
 
 # node
 node_modules

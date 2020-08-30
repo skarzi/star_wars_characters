@@ -22,3 +22,7 @@ DJANGO_ALLOWED_HOSTS=.wisely.dev.tylko.com
 # CORS_ORIGIN_WHITELIST should contain values separated by comma without white spaces,
 # e.g. localhost:3000,dev.myapp.com
 # CORS_ORIGIN_WHITELIST=
+
+
+# STAR WARS API
+STAR_WARS_API_URL=http://swapi/api

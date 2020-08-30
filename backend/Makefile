@@ -13,5 +13,10 @@ lint_django:
 	# run django check
 	python manage.py check --fail-level=WARNING
 
+.PHONY: unit
+unit:
+	pytest --dead-fixtures --dup-fixtures
+	pytest
+
 .PHONY: test
-test: lint_python lint_django
+test: lint_python lint_django unit
