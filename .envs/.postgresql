@@ -1,0 +1,4 @@
+# PostgreSQL
+POSTGRES_DB=db
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=passwd123

@@ -5,3 +5,24 @@ services:
     ports:
       - "8001:8000"
     command: python manage.py runserver 0.0.0.0:8000
+
+  db:
+    user: "!!UID!!"
+    env_file:
+      - .envs/.postgresql
+
+  app:
+    user: "!!UID!!"
+    build:
+      target: development_build
+      args:
+        DJANGO_ENV: local
+        USER_ID: "!!UID!!"
+    ports:
+      - "8000:8000"
+    env_file:
+      - .envs/.postgresql
+      - .envs/.django
+    volumes:
+      - ./shared/media:/app/media:cached
+      - ./shared/static_files:/app/static_files:cached

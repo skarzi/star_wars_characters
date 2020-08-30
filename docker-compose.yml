@@ -10,3 +10,23 @@ services:
       - 8000
     volumes:
       - "./swapi:/app"
+
+  db:
+    image: "postgres:13"
+    volumes:
+      - ./shared/postgresql:/var/lib/postgresql/data
+    environment:
+      # set `${PGDATA}` to a subfolder because PostgreSQL needs this directory
+      # to be empty, and there is already `.gitkeep` file there
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  app:
+    build:
+      context: .
+      dockerfile: ./.devops/docker/backend/Dockerfile
+    volumes:
+      - ./backend:/app
+      - ./shared/static:/app/static:cached
+      - ./shared/templates:/app/templates:cached
+    depends_on:
+      - db

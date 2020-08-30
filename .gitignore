@@ -1,5 +1,24 @@
 # python
 .python-version
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+
 # docker
 docker-compose.override.yml
+
+
+# app
+shared/media
+shared/postgresql
+shared/static
+shared/static_files
+shared/templates
