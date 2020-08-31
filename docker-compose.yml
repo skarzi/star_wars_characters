@@ -27,8 +27,8 @@ services:
       dockerfile: ./.devops/docker/backend/Dockerfile
     volumes:
       - ./backend:/app
-      - ./shared/static:/app/static:cached
-      - ./shared/templates:/app/templates:cached
+      - ./shared/static:/app/shared/static:cached
+      - ./shared/templates:/app/shared/templates:cached
     depends_on:
       - db
 

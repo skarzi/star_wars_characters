@@ -24,8 +24,8 @@ services:
       - .envs/.postgresql
       - .envs/.django
     volumes:
-      - ./shared/media:/app/media:cached
-      - ./shared/static_files:/app/static_files:cached
+      - ./shared/media:/app/shared/media:cached
+      - ./shared/static_files:/app/shared/static_files:cached
 
   web:
     tty: true
