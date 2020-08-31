@@ -24,7 +24,7 @@ class BaseCollectionView(petl.Table):
         """Initialize ``CollectionView`` instance."""
         self.client = client
 
-    def __iter__(self) -> Iterator[Tuple]:
+    def __iter__(self) -> Iterator[Tuple[str, ...]]:
         """Iterate over Star Wars API resource collection."""
         yield tuple(self.field_names)
         initial_response = self.client.get(self.url)
@@ -36,7 +36,7 @@ class BaseCollectionView(petl.Table):
         """URL of collection named with ``collection_name``."""
         return url_join(settings.STAR_WARS_API_URL, self.collection_name)
 
-    def process(self, response: Response) -> Iterator[Tuple]:
+    def process(self, response: Response) -> Iterator[Tuple[str, ...]]:
         """Process Star Wars API resource collection response to PETL row."""
         yield from (
             tuple(resource[name] for name in self.field_names)

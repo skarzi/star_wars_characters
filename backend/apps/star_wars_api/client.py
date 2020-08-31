@@ -11,7 +11,7 @@ from requests.structures import CaseInsensitiveDict
 class StarWarsAPIClient(object):  # noqa: WPS214
     """Star Wars API client using ``requests.Session``."""
 
-    default_headers: ClassVar[CaseInsensitiveDict] = CaseInsensitiveDict(
+    default_headers: ClassVar['CaseInsensitiveDict[str]'] = CaseInsensitiveDict(
         {'Content-Type': 'application/json', 'Accept': 'application/json'},
     )
 

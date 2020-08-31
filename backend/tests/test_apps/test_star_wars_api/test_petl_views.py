@@ -54,7 +54,7 @@ def test_iter_non_empty_response(mocker, client, view):
 
 class TestProcessPeopleCollectionView(object):
     @pytest.fixture
-    def people_view(self, star_wars_api_url):
+    def people_view(self):
         """Object pretending to be ``PeopleCollectionView`` instance."""
         return petl.fromdicts(
             [
@@ -88,7 +88,7 @@ class TestProcessPeopleCollectionView(object):
         )
 
     @pytest.fixture
-    def planets_view(self, star_wars_api_url):
+    def planets_view(self):
         """Object pretending to be ``PlanetsCollectionView`` instance."""
         return petl.fromdicts(
             [
