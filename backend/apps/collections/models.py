@@ -2,11 +2,13 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
-class CollectionDownload(models.Model):
+# NOTE: potential `mypy` bug:
+# https://github.com/typeddjango/django-stubs/issues/142
+class CollectionDownload(models.Model):  # type: ignore[misc]
     """Model representing Star Wars API people/characters download."""
 
     file = models.FileField(  # noqa: WPS110
-        upload_to='collections/',
+        upload_to='collections/%Y/%m/%d/',  # noqa: WPS323
         validators=[FileExtensionValidator(allowed_extensions=('csv',))],
     )
     created_at = models.DateTimeField(auto_now_add=True)

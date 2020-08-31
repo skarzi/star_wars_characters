@@ -10,8 +10,7 @@ from django.db import (
 
 class Migration(migrations.Migration):
     initial = True
-    dependencies = [
-    ]
+    dependencies = []  # type: ignore
     operations = [
         migrations.CreateModel(
             name='CollectionDownload',
@@ -28,7 +27,7 @@ class Migration(migrations.Migration):
                 (
                     'file',
                     models.FileField(
-                        upload_to='collections/',
+                        upload_to='collections/%Y/%m/%d/',  # noqa: WPS323
                         validators=[
                             django.core.validators.FileExtensionValidator(
                                 allowed_extensions=('csv',),
