@@ -1,6 +1,8 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils.functional import cached_property
 
+import petl
 
 
 class PeopleCollection(models.Model):
@@ -21,3 +23,8 @@ class PeopleCollection(models.Model):
             self.file.path,
             self.created_at.isoformat(timespec='minutes'),
         )
+
+    @cached_property
+    def petl_view(self) -> petl.Table:
+        """``petl.Table`` built from stored CSV ``file``."""
+        return petl.fromcsv(source=self.file)
