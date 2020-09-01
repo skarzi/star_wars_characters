@@ -28,7 +28,7 @@ def api_client() -> APIClient:
 
 
 @pytest.fixture
-def api_rf() -> APIClient:
+def api_rf() -> APIRequestFactory:
     """REST framework test ``APIRequestFactory`` instance."""
     skip_if_no_django()
     return APIRequestFactory()

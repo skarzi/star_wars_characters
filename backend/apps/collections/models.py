@@ -2,9 +2,8 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
-# NOTE: potential `mypy` bug:
-# https://github.com/typeddjango/django-stubs/issues/142
-class PeopleCollection(models.Model):  # type: ignore[misc]
+
+class PeopleCollection(models.Model):
     """Model representing Star Wars API people/characters download."""
 
     file = models.FileField(  # noqa: WPS110

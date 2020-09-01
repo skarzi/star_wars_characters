@@ -1,7 +1,8 @@
 import datetime
 
 
-def test_collection_download_str_representation(people_collection_factory):
+
+def test_people_collection_str_representation(people_collection_factory):
     """Ensure ``PeopleCollection`` has proper string representation."""
     now = datetime.datetime(2020, 8, 30, 10, 54, tzinfo=datetime.timezone.utc)
     collection = people_collection_factory.build(created_at=now)

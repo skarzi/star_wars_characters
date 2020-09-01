@@ -9,7 +9,7 @@ from django.db import (
 
 class Migration(migrations.Migration):
     initial = True
-    dependencies = []
+    dependencies = []  # type: ignore[var-annotated]
     operations = [
         migrations.CreateModel(
             name='PeopleCollection',
@@ -26,7 +26,9 @@ class Migration(migrations.Migration):
                 (
                     'file',
                     models.FileField(
-                        upload_to='collections/people/%Y/%m/%d/',
+                        upload_to=(
+                            'collections/people/%Y/%m/%d/'  # noqa: WPS323
+                        ),
                         validators=[
                             django.core.validators.FileExtensionValidator(
                                 allowed_extensions=('csv',),
