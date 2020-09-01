@@ -1,5 +1,3 @@
-import petl
-
 from rest_framework import (
     generics,
     status,
@@ -39,19 +37,14 @@ class PeopleCollectionFieldsCountsAPIView(generics.RetrieveAPIView):
     queryset = models.PeopleCollection.objects.all()
 
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
-        """Count all combination of all field names."""
+        """Count combinations of all fields values in requested collection."""
         collection = self.get_object()
-        # TODO: add ``field_names`` validation
-        field_names = kwargs['field_names']
-        fields_counts = petl.valuecounts(collection.petl_view, *field_names)
-        fields_counts = fields_counts.cutout('frequency')
-        fields_counts_iterator = iter(fields_counts)
-        keys = next(fields_counts_iterator, [])
         return Response(
             data={
-                'data': [
-                    dict(zip(keys, row)) for row in fields_counts_iterator
-                ],
+                'data': services.count_fields(
+                    collection.petl_view,
+                    kwargs['field_names'],
+                ),
             },
             status=status.HTTP_200_OK,
         )

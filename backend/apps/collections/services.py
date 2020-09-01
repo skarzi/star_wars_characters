@@ -1,8 +1,16 @@
 import uuid
 
-from typing import Optional
+from typing import (
+    Any,
+    Dict,
+    List,
+    Optional,
+    Tuple,
+)
 
 from django.core.files.base import ContentFile
+
+import petl
 
 from petl.io.sources import MemorySource
 
@@ -29,3 +37,18 @@ def download_people_collection(
         ContentFile(people_view_output.getvalue()),
     )
     return instance
+
+
+def count_fields(
+    petl_view: petl.Table,
+    field_names: Tuple[str, ...],
+) -> List[Dict[str, Any]]:
+    """Count combinations of ``field_names`` fields in given ``petl_view``."""
+    # TODO: add ``field_names`` validation
+    fields_counts = petl.valuecounts(petl_view, *field_names)
+    fields_counts = fields_counts.cut(*field_names, 'count')
+    fields_counts_iterator = iter(fields_counts)
+    keys: Tuple[str, ...] = next(fields_counts_iterator, ())
+    return [
+        dict(zip(keys, row)) for row in fields_counts_iterator
+    ]
