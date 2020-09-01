@@ -2,7 +2,10 @@ import pytest
 
 from pytest_django.lazy_django import skip_if_no_django
 from pytest_factoryboy import register
-from rest_framework.test import APIClient
+from rest_framework.test import (
+    APIClient,
+    APIRequestFactory,
+)
 
 from tests import factories
 
@@ -22,3 +25,10 @@ def api_client() -> APIClient:
     """REST framework test ``APIClient`` instance."""
     skip_if_no_django()
     return APIClient()
+
+
+@pytest.fixture
+def api_rf() -> APIClient:
+    """REST framework test ``APIRequestFactory`` instance."""
+    skip_if_no_django()
+    return APIRequestFactory()

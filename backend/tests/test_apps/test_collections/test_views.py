@@ -19,3 +19,11 @@ class TestPeopleCollectionListCreateAPIView(object):
         response = api_client.post(self.url)
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data['data']['id'] == people_collection.id
+
+    def test_list(self, people_collection_factory, api_client):
+        """Ensure list endpoint returns expected data."""
+        people_collection_factory.create_batch(11)
+        response = api_client.get(self.url)
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['next']
+        assert len(response.data['data'])
