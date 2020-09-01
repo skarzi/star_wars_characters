@@ -6,7 +6,7 @@ from apps.collections import services
 
 @pytest.mark.django_db
 def test_download_people_collection(mocker, client):
-    """Ensure proper ``CollectionDownload`` instance is created."""
+    """Ensure proper ``PeopleCollection`` instance is created."""
     mocker.patch(
         'apps.star_wars_api.petl_views.process_people_collection_view',
         return_value=petl.fromdicts(

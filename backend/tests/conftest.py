@@ -10,4 +10,4 @@ def pytest_sessionstart(session):
 
 def register_factories() -> None:
     """Register ``factory_boy`` factories."""
-    register(factories.CollectionDownloadFactory)
+    register(factories.PeopleCollectionFactory)

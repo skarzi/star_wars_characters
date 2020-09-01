@@ -6,14 +6,14 @@ from django.core.files.base import ContentFile
 
 from petl.io.sources import MemorySource
 
-from apps.collections.models import CollectionDownload
+from apps.collections.models import PeopleCollection
 from apps.star_wars_api import petl_views
 from apps.star_wars_api.client import StarWarsAPIClient
 
 
 def download_people_collection(
     client: Optional[StarWarsAPIClient] = None,
-) -> CollectionDownload:
+) -> PeopleCollection:
     """Download Star Wars API people collection and saves it in DB."""
     client = client or StarWarsAPIClient()
     people_view = petl_views.process_people_collection_view(
@@ -23,7 +23,7 @@ def download_people_collection(
     people_view_output = MemorySource()
     people_view.tocsv(people_view_output)
 
-    instance = CollectionDownload()
+    instance = PeopleCollection()
     instance.file.save(
         '{0}.csv'.format(uuid.uuid4().hex),
         ContentFile(people_view_output.getvalue()),
