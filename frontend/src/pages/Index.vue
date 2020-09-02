@@ -44,6 +44,7 @@ const collectionsNamespace = createNamespacedHelpers('collections')
 @Component({
   components: { CollectionList },
   computed: collectionsNamespace.mapState([
+    'wasRequestSent',
     'collections',
     'totalCount',
     'nextPage'
@@ -55,6 +56,7 @@ const collectionsNamespace = createNamespacedHelpers('collections')
 })
 export default class PageIndex extends Vue {
   // state
+  wasRequestSent!: boolean
   collections!: Collection[]
   totalCount!: number
   nextPage!: string
@@ -65,21 +67,18 @@ export default class PageIndex extends Vue {
   isCreating = false
 
   async loadMoreCollections (index, done) {
-    if (this.nextPage) {
+    const shouldStop = this.wasRequestSent && !this.nextPage
+    if (!shouldStop) {
       await this.fetchCollection(this.nextPage)
     }
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    done(!!this.nextPage)
+    done(shouldStop)
   }
 
   async createNewCollection () {
     this.isCreating = true
     await this.createCollection()
     this.isCreating = false
-  }
-
-  async mounted () {
-    await this.fetchCollection()
   }
 }
 </script>

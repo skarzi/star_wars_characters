@@ -14,10 +14,10 @@ const actions: ActionTree<CollectionsStateInterface, StateInterface> = {
       @typescript-eslint/no-unsafe-member-access
     */
     const response = await this._vm.$peopleAPI.get<AxiosPeopleCollectionResponse>(
-      concreteURL || 'collections/people/'
+      (concreteURL || 'collections/people/'),
+      // TODO: load it from env
+      { params: { limit: 50 } }
     )
-    console.log('Collection Fetched!')
-    console.log(response)
     context.commit('processCollections', response.data.data)
     context.commit('setNextPage', response.data.next || '')
     context.commit('setTotalCount', response.data.count)

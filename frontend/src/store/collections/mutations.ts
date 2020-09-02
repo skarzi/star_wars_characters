@@ -10,6 +10,7 @@ const mutation: MutationTree<CollectionsStateInterface> = {
   ) {
     const collections = rawCollections.map(processCollection)
     state.collections = [...collections, ...state.collections]
+    state.wasRequestSent = true
   },
   appendCollection (
     state: CollectionsStateInterface,

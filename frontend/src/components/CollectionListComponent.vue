@@ -2,7 +2,7 @@
   <q-list dark bordered separator>
     <q-item
       v-for="collection in collections"
-      :key="collection.id"
+      :key="`collection-${collection.id}`"
       :to="{ name: 'collection-detail', params: { id: collection.id } }"
     >
       <q-item-label>
