@@ -15,7 +15,7 @@ class PeopleCollection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta(object):
-        ordering = ('created_at',)
+        ordering = ('-created_at',)
 
     def __str__(self) -> str:
         """Instance's string representation."""

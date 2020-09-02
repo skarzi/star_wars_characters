@@ -15,7 +15,7 @@ class PeopleCollectionPagination(pagination.LimitOffsetPagination):
     """``PeopleCollection`` custom pagination."""
 
     default_limit: int = 10
-    max_limit: int = default_limit
+    max_limit: int = 50
 
     # TODO: override also ``get_paginated_response_schema``
     def get_paginated_response(

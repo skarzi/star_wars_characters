@@ -38,6 +38,6 @@ class Migration(migrations.Migration):
                 ),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
             ],
-            options={'ordering': ('created_at',)},
+            options={'ordering': ('-created_at',)},
         ),
     ]
