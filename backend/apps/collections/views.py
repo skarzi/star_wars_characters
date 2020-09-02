@@ -1,3 +1,5 @@
+from django.utils.functional import cached_property
+
 from rest_framework import (
     generics,
     status,
@@ -47,4 +49,23 @@ class PeopleCollectionFieldsCountsAPIView(generics.RetrieveAPIView):
                 ),
             },
             status=status.HTTP_200_OK,
+        )
+
+
+class PeopleCollectionDataListAPIView(generics.GenericAPIView):
+    """``APIView`` to list ``PeopleCollection`` data."""
+
+    queryset = models.PeopleCollection.objects.all()
+
+    def get(self, request: Request, *args, **kwargs) -> Response:
+        """List data of requested collection."""
+        collection = self.get_object()
+        page = self.paginator.paginate_view(collection.petl_view, request)
+        return self.get_paginated_response(page)
+
+    @cached_property
+    def paginator(self):
+        """``PETLViewLimitOffsetPagination`` instance."""
+        return pagination.PETLViewLimitOffsetPagination(
+            pagination.PeopleCollectionPagination(),
         )

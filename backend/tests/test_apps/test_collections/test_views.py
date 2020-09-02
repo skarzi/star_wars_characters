@@ -57,3 +57,24 @@ class TestPeopleCollectionFieldCountsAPIView(object):
             [{'field0': '0', 'count': 3}, {'field0': '1', 'count': 2}],
             key=operator.itemgetter('count', 'field0'),
         )
+
+
+@pytest.mark.django_db
+class TestPeopleCollectionDataListAPIView(object):
+    view_name = 'collections:people_data-list'
+
+    def test_get_valid_collection(
+        self,
+        dummy_people_collection,
+        api_client,
+    ):
+        """Ensure list endpoint returns expected data when collection valid."""
+        response = api_client.get(
+            reverse(
+                self.view_name,
+                kwargs={'pk': dummy_people_collection.id},
+            ),
+            data={'limit': 1},
+        )
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data['data'] == [{'field0': '0', 'field1': '10'}]

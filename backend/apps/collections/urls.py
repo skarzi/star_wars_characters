@@ -17,6 +17,11 @@ urlpatterns = [
         name='people-list',
     ),
     path(
+        'people/<int:pk>/',
+        views.PeopleCollectionDataListAPIView.as_view(),
+        name='people_data-list',
+    ),
+    path(
         'people/<int:pk>/counts/<csv_string:field_names>/',
         views.PeopleCollectionFieldsCountsAPIView.as_view(),
         name='people_fields_counts-detail',
