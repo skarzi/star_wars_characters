@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="bg-black">
       <q-toolbar>
-        <q-toolbar-title class="text-warning text-center">
+        <q-toolbar-title class="text-primary text-center">
           Star Wars Characters
         </q-toolbar-title>
       </q-toolbar>

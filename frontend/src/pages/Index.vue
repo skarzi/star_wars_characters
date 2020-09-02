@@ -1,48 +1,85 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page class="row items-start justify-evenly">
+    <div class="q-my-md col-xs-10">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="text-primary text-left text-h4">
+            Collections
+            <span class="q-ml-md text-caption">
+              {{ collections.length }} / {{ totalCount }}
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-4 text-right">
+          <q-btn
+            label="Fetch"
+            color="primary"
+            text-color="black"
+            :loading="isCreating"
+            @click="createNewCollection()"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-10">
+      <q-infinite-scroll
+        @load="loadMoreCollections"
+        debounce="300"
+        :initial-index="collections.length"
+      >
+        <collection-list :collections="collections"></collection-list>
+      </q-infinite-scroll>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models'
-import ExampleComponent from 'components/ClassComponent.vue'
+import { Collection } from 'components/models'
+import CollectionList from 'components/CollectionListComponent.vue'
 import { Vue, Component } from 'vue-property-decorator'
+import { createNamespacedHelpers } from 'vuex'
+
+const collectionsNamespace = createNamespacedHelpers('collections')
 
 @Component({
-  components: { ExampleComponent }
+  components: { CollectionList },
+  computed: collectionsNamespace.mapState([
+    'collections',
+    'totalCount',
+    'nextPage'
+  ]),
+  methods: collectionsNamespace.mapActions([
+    'fetchCollection',
+    'createCollection'
+  ])
 })
 export default class PageIndex extends Vue {
-  todos: Todo[] = [
-    {
-      id: 1,
-      content: 'ct1'
-    },
-    {
-      id: 2,
-      content: 'ct2'
-    },
-    {
-      id: 3,
-      content: 'ct3'
-    },
-    {
-      id: 4,
-      content: 'ct4'
-    },
-    {
-      id: 5,
-      content: 'ct5'
-    }
-  ];
+  // state
+  collections!: Collection[]
+  totalCount!: number
+  nextPage!: string
+  // actions
+  fetchCollection!: () => Promise<void>
+  createCollection!: () => Promise<void>
 
-  meta: Meta = {
-    totalCount: 1200
-  };
+  isCreating = false
+
+  async loadMoreCollections (index, done) {
+    if (this.nextPage) {
+      await this.fetchCollection(this.nextPage)
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    done(!!this.nextPage)
+  }
+
+  async createNewCollection () {
+    this.isCreating = true
+    await this.createCollection()
+    this.isCreating = false
+  }
+
+  async mounted () {
+    await this.fetchCollection()
+  }
 }
 </script>
