@@ -54,6 +54,13 @@ Then, you can run all services:
 docker-compose up --detach
 ```
 
+WEB UI and REST API services ports are forwarded from container to localhost:
+
++ [localhost:8080](http://localhost:8080) - WEB UI
++ [localhost:8000](http://localhost:8000) - REST API, you can verify it's
+  health on [localhost:8000/healthz](http://localhost:8000/healthz)
++ [localhost:8001](http://localhost:8001) - Star Wars API
+
 Linters and unit tests of backend service can be run with executing:
 
 ```bash
