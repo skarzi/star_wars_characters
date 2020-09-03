@@ -29,7 +29,6 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
     'health_check',
@@ -131,8 +130,6 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # URLs
 ROOT_URLCONF = 'config.urls'
-# Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = 'admin/'
 
 
 # WSGI
