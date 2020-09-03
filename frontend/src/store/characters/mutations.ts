@@ -2,6 +2,7 @@ import { MutationTree } from 'vuex'
 import { CharactersStateInterface } from './state'
 import { RawCharacter } from './interfaces'
 import { processCharacter } from './utils'
+import { CollectionMeta } from '../../components/models'
 
 const mutation: MutationTree<CharactersStateInterface> = {
   processCharacters (
@@ -17,10 +18,14 @@ const mutation: MutationTree<CharactersStateInterface> = {
   setNextPage (state: CharactersStateInterface, newNextPage: string) {
     state.nextPage = newNextPage
   },
+  setMeta (state: CharactersStateInterface, newMeta: CollectionMeta) {
+    state.meta = newMeta
+  },
   clearCharactersData (state: CharactersStateInterface) {
     state.characters = []
     state.totalCount = 0
     state.nextPage = ''
+    state.meta = null
   }
 }
 

@@ -13,12 +13,18 @@
       hide-pagination
       flat
       square
-    />
+    >
+      <template v-slot:top>
+        <a :href="meta.file">
+          {{ meta.filename }}
+        </a>
+      </template>
+    </q-table>
   </q-page>
 </template>
 
 <script lang="ts">
-import { FieldCount } from 'components/models'
+import { FieldCount, CollectionMeta } from 'components/models'
 import { Vue, Component } from 'vue-property-decorator'
 
 export interface FieldsCountsResponse {
@@ -27,6 +33,7 @@ export interface FieldsCountsResponse {
 
 export interface AxiosFieldsCountsResponse {
   data: FieldsCountsResponse
+  meta: CollectionMeta
   status: number
 }
 
@@ -41,6 +48,7 @@ export default class CollectionFieldsCounts extends Vue {
   isLoading = false
 
   fieldsCounts: Array<FieldCount> = []
+  meta?: CollectionMeta = null
 
   pagination = {
     page: 1,
@@ -75,6 +83,7 @@ export default class CollectionFieldsCounts extends Vue {
       `collections/people/${this.$route.params.id}/counts/${this.$route.params.fieldNames}/`
     )
     this.fieldsCounts = response.data.data
+    this.meta = response.data.meta
   }
 }
 </script>

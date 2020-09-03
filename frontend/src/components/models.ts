@@ -19,3 +19,9 @@ export interface FieldCount {
   [name: string]: string | number;
   count: number;
 }
+
+export interface CollectionMeta {
+  file: string;
+  filename: string;
+  createdAt: Date;
+}

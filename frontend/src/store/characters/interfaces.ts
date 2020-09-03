@@ -1,3 +1,5 @@
+import { CollectionMeta } from '../../components/models'
+
 export interface RawCharacter {
   url: string;
   name: string;
@@ -14,6 +16,7 @@ export interface RawCharacter {
 
 export interface CharactersResponse {
   data: Array<RawCharacter>
+  meta: CollectionMeta
   count: number
   next: string
   previous: string

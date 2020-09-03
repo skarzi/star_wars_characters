@@ -30,7 +30,9 @@
       </template>
 
       <template v-slot:top>
-        file.csv
+        <a :href="meta.file">
+          {{ meta.filename }}
+        </a>
         <q-space />
         <q-btn
           color="primary"
@@ -57,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { Character } from 'components/models'
+import { Character, CollectionMeta } from 'components/models'
 import { Vue, Component } from 'vue-property-decorator'
 import { createNamespacedHelpers } from 'vuex'
 
@@ -67,7 +69,8 @@ const charactersNamespace = createNamespacedHelpers('characters')
   computed: charactersNamespace.mapState([
     'characters',
     'totalCount',
-    'nextPage'
+    'nextPage',
+    'meta'
   ]),
   methods: charactersNamespace.mapActions([
     'fetchCharacters',
@@ -79,6 +82,7 @@ export default class CollectionDetail extends Vue {
   characters!: Character[]
   totalCount!: number
   nextPage!: string
+  nextPage!: CollectionMeta
   // actions
   fetchCharacters!: () => Promise<void>
   clearCharactersData!: () => void
