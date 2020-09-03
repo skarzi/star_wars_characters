@@ -70,7 +70,8 @@ const charactersNamespace = createNamespacedHelpers('characters')
     'nextPage'
   ]),
   methods: charactersNamespace.mapActions([
-    'fetchCharacters'
+    'fetchCharacters',
+    'clearCharactersData'
   ])
 })
 export default class CollectionDetail extends Vue {
@@ -80,6 +81,7 @@ export default class CollectionDetail extends Vue {
   nextPage!: string
   // actions
   fetchCharacters!: () => Promise<void>
+  clearCharactersData!: () => void
 
   isLoading = false
 
@@ -103,7 +105,7 @@ export default class CollectionDetail extends Vue {
   selectedFieldNames: Array<string> = []
 
   async created () {
-    // TODO: clear characters before fetchin new ones
+    this.clearCharactersData()
     await this.fetchCharacters(`collections/people/${this.$route.params.id}`)
   }
 

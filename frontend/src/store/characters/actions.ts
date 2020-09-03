@@ -17,6 +17,9 @@ const actions: ActionTree<CharactersStateInterface, StateInterface> = {
     context.commit('setNextPage', response.data.next || '')
     context.commit('setTotalCount', response.data.count)
     /* eslint-enable */
+  },
+  clearCharactersData (context) {
+    context.commit('clearCharactersData')
   }
 }
 

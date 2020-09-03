@@ -16,6 +16,11 @@ const mutation: MutationTree<CharactersStateInterface> = {
   },
   setNextPage (state: CharactersStateInterface, newNextPage: string) {
     state.nextPage = newNextPage
+  },
+  clearCharactersData (state: CharactersStateInterface) {
+    state.characters = []
+    state.totalCount = 0
+    state.nextPage = ''
   }
 }
 
