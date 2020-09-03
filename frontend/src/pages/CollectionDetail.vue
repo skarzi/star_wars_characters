@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row items-start justify-evenly">
+  <q-page class="row items-start justify-evenly q-py-md">
     <q-table
       row-key="name"
       :data="characters"

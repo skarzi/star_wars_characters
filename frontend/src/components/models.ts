@@ -14,3 +14,8 @@ export interface Character {
   homeworld: string;
   date: string;
 }
+
+export interface FieldCount {
+  [name: string]: string | number;
+  count: number;
+}

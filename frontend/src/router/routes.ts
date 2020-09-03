@@ -10,6 +10,11 @@ const routes: RouteConfig[] = [
         path: '/collections/:id',
         name: 'collections-detail',
         component: () => import('pages/CollectionDetail.vue')
+      },
+      {
+        path: '/collections/:id/fields-counts/:fieldNames',
+        name: 'collections-fields-counts',
+        component: () => import('pages/CollectionFieldsCounts.vue')
       }
     ]
   },
