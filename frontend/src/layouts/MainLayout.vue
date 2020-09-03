@@ -3,7 +3,11 @@
     <q-header elevated class="bg-black">
       <q-toolbar>
         <q-toolbar-title class="text-primary text-center">
-          Star Wars Characters
+          <q-btn
+            label="Star Wars Characters"
+            to="/"
+            no-caps
+          />
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
