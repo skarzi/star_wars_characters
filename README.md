@@ -34,6 +34,7 @@ docker-compose build
 ```
 
 To setup `swapi` service use following commands:
+
 NOTE: You will be prompted for superuser `username` and `password`,
 please provide it!
 
