@@ -37,6 +37,7 @@ class PeopleCollectionFieldsCountsAPIView(generics.RetrieveAPIView):
     """``APIView`` to count ``PeopleCollection`` fields combinations."""
 
     queryset = models.PeopleCollection.objects.all()
+    serializer_class = serializers.PeopleCollectionDataMetaSerializer
 
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         """Count combinations of all fields values in requested collection."""
@@ -47,6 +48,7 @@ class PeopleCollectionFieldsCountsAPIView(generics.RetrieveAPIView):
                     collection.petl_view,
                     kwargs['field_names'],
                 ),
+                'meta': self.get_serializer(collection).data,
             },
             status=status.HTTP_200_OK,
         )
@@ -56,12 +58,17 @@ class PeopleCollectionDataListAPIView(generics.GenericAPIView):
     """``APIView`` to list ``PeopleCollection`` data."""
 
     queryset = models.PeopleCollection.objects.all()
+    serializer_class = serializers.PeopleCollectionDataMetaSerializer
 
     def get(self, request: Request, *args, **kwargs) -> Response:
         """List data of requested collection."""
         collection = self.get_object()
         page = self.paginator.paginate_view(collection.petl_view, request)
-        return self.get_paginated_response(page)
+        response = self.get_paginated_response(page)
+        response.data['meta'] = self.get_serializer(  # type: ignore[index]
+            collection,
+        ).data
+        return response
 
     @cached_property
     def paginator(self):

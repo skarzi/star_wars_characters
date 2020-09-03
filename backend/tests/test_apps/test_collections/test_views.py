@@ -52,6 +52,7 @@ class TestPeopleCollectionFieldCountsAPIView(object):
             ),
         )
         assert response.status_code == status.HTTP_200_OK
+        assert response.data['meta']
         assert_sorted_equal(
             response.data['data'],
             [{'field0': '0', 'count': 3}, {'field0': '1', 'count': 2}],
@@ -77,4 +78,5 @@ class TestPeopleCollectionDataListAPIView(object):
             data={'limit': 1},
         )
         assert response.status_code == status.HTTP_200_OK
+        assert response.data['meta']
         assert response.data['data'] == [{'field0': '0', 'field1': '10'}]
