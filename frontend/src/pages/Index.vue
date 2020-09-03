@@ -66,6 +66,7 @@ export default class PageIndex extends Vue {
 
   isCreating = false
 
+  // TODO: clear characters on before create event
   async loadMoreCollections (index, done) {
     const shouldStop = this.wasRequestSent && !this.nextPage
     if (!shouldStop) {
