@@ -2,7 +2,9 @@ import { store } from 'quasar/wrappers'
 import Vuex from 'vuex'
 
 import collections from './collections'
+import characters from './characters'
 import { CollectionsStateInterface } from './collections/state'
+import { CharactersStateInterface } from './characters/state'
 
 /*
  * If not building with SSR mode, you can
@@ -11,6 +13,7 @@ import { CollectionsStateInterface } from './collections/state'
 
 export interface StateInterface {
   collections: CollectionsStateInterface;
+  characters: CharactersStateInterface;
 }
 
 export default store(function ({ Vue }) {
@@ -18,7 +21,8 @@ export default store(function ({ Vue }) {
 
   const Store = new Vuex.Store<StateInterface>({
     modules: {
-      collections
+      collections,
+      characters
     },
 
     // enable strict mode (adds overhead!)

@@ -3,7 +3,7 @@
     <q-item
       v-for="collection in collections"
       :key="`collection-${collection.id}`"
-      :to="{ name: 'collection-detail', params: { id: collection.id } }"
+      :to="{ name: 'collections-detail', params: { id: collection.id } }"
     >
       <q-item-label>
         {{ collection.createdAt.toLocaleString() }}
