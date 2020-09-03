@@ -66,7 +66,7 @@ export default class PageIndex extends Vue {
 
   isCreating = false
 
-  async loadMoreCollections (index, done) {
+  async loadMoreCollections (index: number, done) {
     const shouldStop = this.wasRequestSent && !this.nextPage
     if (!shouldStop) {
       await this.fetchCollection(this.nextPage)
